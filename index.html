@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>woapa</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="icon" href="images/pfp.jpeg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@1,500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="top">
+        <!-- this div will hold the background image, this is for parallax scrolling -->
+        <div class="background"></div>
+        <!-- this div will act as a container for the intro text -->
+        <div class="topProfile">
+            <img class="profilePicture" id="pfp" src="images/pfp.jpeg" alt="Profile Picture">
+            <div class="displayedText">
+                <h1>hi, i'm woapa!</h1>
+                <div class="displayedTextSeperator">
+                    <p class="txt">i like <span id="txt-like"></span></p>
+                    <p class="typer">I</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- the main body of the site, not html -->
+    <div class="mainbody">
+        <!-- cool weird particles -->
+        <ul class='circles'>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <div class="upperbody">
+            <h1 class="helpertext_end" id="helpertext">
+                Scroll down
+            </h1>
+        </div>
+
+        <div class="hiddenbody" id="bodysection">
+            <!-- cards -->
+            <div id="cardbody">
+                <div id="cards">
+                    <div class="card">
+                        <div class="card-border"></div>
+                        <div class="card-content">
+                            <img class="card-image-background" src="images/card0.png" alt="picture">
+                            <div class="card-interactor">
+                                <div class="unhover">
+                                    <p class="utxt">WHO AM I</p>
+                                </div>
+                                <div class="hover">
+                                    <p class="utxt">read the top stupid</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>,
+                    <div class="card">
+                        <div class="card-border"></div>
+                        <div class="card-content">
+                            <img class="card-image-background" src="images/card1.png" alt="picture">
+                            <div class="card-interactor">
+                                <div class="unhover">
+                                    <p class="utxt">LANGUAGES</p>
+                                </div>
+                                <div class="hover">
+                                    <p class="utxt">Rust C++<br> Lua HTML<br> CSS JavaScript<br> SQL Python</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>,
+                    <div class="card">
+                        <div class="card-border"></div>
+                        <div class="card-content">
+                            <img class="card-image-background" src="images/card2.png" alt="picture">
+                            <div class="card-interactor">
+                                <div class="unhover">
+                                    <p class="utxt">MY WORKS</p>
+                                </div>
+                                <div class="hover">
+                                    <p class="utxt">i have nothing<br> else to show</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>,
+                    <div class="card">
+                        <div class="card-border"></div>
+                        <div class="card-content">
+                            <img class="card-image-background" src="images/card3.png" alt="picture">
+                            <div class="card-interactor">
+                                <div class="unhover">
+                                    <p class="utxt">CONTACT</p>
+                                </div>
+                                <div class="hover">
+                                    <p class="utxt">woapa#6154</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>,
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascript/main.js"></script>
+</body>
+
+</html>

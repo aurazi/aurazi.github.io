@@ -1,0 +1,614 @@
+:root {
+    /* global color variables */
+    --mainSplash: #0b0b17;
+    --darkSplash: #010910;
+    --decor1: #f3e0ff;
+    --decor2: #EBA5FF;
+    --decor3: #2c0c39;
+    --decor4: #eba5ff79;
+    --decor5: #f3e0ff42;
+    --decor6: #eba5ffba;
+
+    --g0: #bc2dff;
+    --g1: #7c1eff;
+    --g2: #0e3aea;
+
+    --v0: #21092c;
+    --v1: #1d0939;
+    --v2: #071034;
+
+    /* root properties */
+    background-color: var(--mainSplash);
+}
+
+.top {
+    display: flex;
+    margin-bottom: 380px;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.topProfile {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 350px;
+    position: fixed;
+    z-index: -1;
+}
+
+body {
+    margin: 0px;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.mainbody {
+    height: 100%;
+    background-color: var(--mainSplash);
+    z-index: 0;
+}
+
+.background {
+    z-index: -2;
+    width: 100%;
+    position: absolute;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+    background-image: url("../images/wallpaper.jpeg");
+    min-height: 750px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    filter: blur(7px) brightness(0.6);
+    -webkit-filter: blur(7px) brightness(0.6);
+}
+
+.topProfile .displayedText {
+    text-align: left;
+    padding-top: 30px;
+}
+
+.topProfile .displayedText h1 {
+    font-weight: 600;
+    font-size: 55px;
+    font-family: 'Prompt', sans-serif;
+    color: var(--decor1);
+    text-shadow: 0px 0px 25px var(--decor2);
+    margin: 0px 0px -25px 30px;
+}
+
+.topProfile .displayedText .txt {
+    font-size: 40px;
+    font-style: italic;
+    font-family: 'Prompt', sans-serif;
+    color: var(--decor1);
+    text-shadow: 0px 0px 25px var(--decor2);
+    margin: -20px 0px 0px 30px;
+}
+
+.profilePicture {
+    object-fit: cover;
+    width: 160px;
+    height: 160px;
+    border-radius: 30%;
+    box-shadow: 0px 0px 60px -10px var(--decor2);
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+.displayedTextSeperator {
+    display: flex;
+    align-items: center;
+}
+
+.typer {
+    margin-left: 5px;
+    font-size: 60px;
+    font-style: italic;
+    font-family: 'Prompt', sans-serif;
+    color: var(--decor1);
+    text-shadow: 0px 0px 25px var(--decor2);
+    margin: 0px 0px 14px 0px;
+
+    animation: blinker 1000ms steps(40) infinite normal;
+}
+
+#txt-like {
+    background: linear-gradient(to right,
+            var(--g0),
+            var(--g1),
+            var(--g2),
+            var(--g0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+    animation: txt-gradient 100s linear infinite;
+}
+
+@keyframes txt-gradient {
+    0% {
+        background-position: 0vw;
+    }
+
+    50% {
+        background-position: 50vw;
+    }
+
+    100% {
+        background-position: 100vw;
+    }
+}
+
+@keyframes blinker {
+    0% {
+        opacity: 1.0;
+    }
+
+    39% {
+        opacity: 1.0;
+    }
+
+    40% {
+        opacity: 0.0;
+    }
+
+    70% {
+        opacity: 0.0;
+    }
+
+    71% {
+        opacity: 1.0;
+    }
+
+    100% {
+        opacity: 1.0;
+    }
+}
+
+@media(max-width: 600px) {
+    .upperbody .helpertext_end {
+        font-size: 50px !important;
+        padding-top: 32vh !important;
+    }
+
+    .upperbody .helpertext_play {
+        font-size: 50px !important;
+        padding-top: 32vh !important;
+    }
+
+    .typer {
+        font-size: 35px;
+    }
+
+    .topProfile {
+        align-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding-top: 19px;
+        margin-top: 223px;
+    }
+
+    .profilePicture {
+        width: 90px;
+        height: 90px;
+    }
+
+    .topProfile .displayedText {
+        padding-top: 0px;
+    }
+
+    .topProfile .displayedText h1 {
+        font-size: 30px;
+        margin: 0px 0px -18px 0px;
+    }
+
+    .topProfile .displayedText .txt {
+        font-size: 26px;
+        margin: -14px 0px 0px 0px;
+    }
+
+    .background {
+        min-height: 450px;
+    }
+
+    .top {
+        margin-bottom: 230px;
+    }
+
+    .circles li {
+        bottom: calc(-350px - 100vh);
+    }
+}
+
+/* Animated Circles CSS */
+
+.circles {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.circles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    animation: animate 25s linear infinite;
+    bottom: calc(-50vh);
+
+    background: linear-gradient(to right,
+            var(--v0),
+            var(--v1),
+            var(--v2),
+            var(--v0));
+
+    border-bottom-right-radius: 10px !important;
+    border-top-left-radius: 10px !important;
+}
+
+.circles li:nth-child(1) {
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-duration: 20s;
+    border-radius: 50%;
+}
+
+.circles li:nth-child(2) {
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-duration: 25s;
+    border-radius: 50%;
+}
+
+.circles li:nth-child(3) {
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-duration: 20s;
+    border-radius: 50%;
+}
+
+.circles li:nth-child(4) {
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-duration: 15s;
+    border-radius: 50%;
+}
+
+.circles li:nth-child(5) {
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-duration: 20s;
+    border-radius: 50%;
+}
+
+.circles li:nth-child(6) {
+    left: 75%;
+    width: 90px;
+    height: 90px;
+    animation-duration: 25s;
+    border-radius: 50%;
+}
+
+.circles li:nth-child(7) {
+    left: 35%;
+    width: 50px;
+    height: 50px;
+    animation-duration: 30s;
+    border-radius: 50%;
+}
+
+.circles li:nth-child(8) {
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-duration: 35s;
+    border-radius: 50%;
+}
+
+.circles li:nth-child(9) {
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-duration: 40s;
+    border-radius: 50%;
+}
+
+.circles li:nth-child(10) {
+    left: 85%;
+    width: 50px;
+    height: 50px;
+    animation-duration: 45s;
+    border-radius: 50%;
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(-80px) rotate(0deg);
+        opacity: 0;
+        background-position: 0px;
+    }
+
+    50% {
+        transform: translateY(-40vh) rotate(360deg);
+        opacity: 1;
+        background-position: 100px;
+    }
+
+    100% {
+        transform: translateY(-100vh) rotate(720deg);
+        opacity: 0;
+        background-position: 200px;
+    }
+}
+
+/* Scrollbar custom */
+/* Width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track (behind the scroll bar) */
+::-webkit-scrollbar-track {
+    background: #ffffff00;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+
+    background: linear-gradient(to top,
+            var(--g0),
+            var(--g1),
+            var(--g2),
+            var(--g0));
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to top,
+            var(--g0),
+            var(--g1),
+            var(--g2),
+            var(--g1),
+            var(--g2),
+            var(--g0));
+}
+
+/* Cards */
+#cardbody {
+    display: flex;
+    justify-content: center;
+}
+
+#cards {
+    margin-bottom: 20vh;
+    padding-top: 20vh;
+    display: flex;
+    max-width: 65%;
+    row-gap: 16px;
+    column-gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    transition: background-color 1000ms;
+}
+
+.card {
+    background-color: var(--decor5);
+    height: calc(5vh + 240px);
+    width: calc(10vw + 220px);
+    border-radius: 20px;
+    position: relative;
+    opacity: 0.5;
+    transition: opacity 500ms;
+}
+
+
+.card:hover {
+    opacity: 1;
+    z-index: 1;
+}
+
+#cards:hover>.card::before {
+    opacity: 0.3;
+}
+
+#cards:hover>.card>.card-border {
+    opacity: 1;
+}
+
+.card::before,
+.card>.card-border {
+    border-radius: inherit;
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 500ms;
+}
+
+.card::after {
+    background: radial-gradient(1200px circle at var(--mouse-x) var(--mouse-y),
+            var(--decor4),
+            transparent 20%);
+    z-index: 3;
+}
+
+.card-border {
+    background: radial-gradient(1000px circle at var(--mouse-x) var(--mouse-y),
+            var(--decor6),
+            transparent 30%);
+    z-index: 1;
+}
+
+.card>.card-content {
+    height: calc(100% - 2px);
+    width: calc(100% - 2px);
+    background-color: var(--mainSplash);
+    border-radius: inherit;
+    position: relative;
+    margin-left: 1px;
+    margin-top: 1px;
+    z-index: 2;
+    display: flex;
+}
+
+.card-image-background {
+    border-radius: inherit;
+    height: inherit;
+    width: inherit;
+    margin-left: inherit;
+    margin-top: inherit;
+    object-fit: cover;
+}
+
+.card-interactor {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-interactor .hover {
+    transition: opacity 500ms;
+    opacity: 0;
+    position: absolute;
+}
+
+.card-interactor .unhover {
+    transition: opacity 500ms;
+    opacity: 1;
+    position: absolute;
+}
+
+.card-interactor:hover>.unhover {
+    transition: opacity 500ms;
+    opacity: 0;
+}
+
+.card-interactor:hover>.hover {
+    transition: opacity 500ms;
+    opacity: 1;
+}
+
+.card-interactor .hover .utxt {
+    font-weight: 600;
+    font-size: 40px;
+    font-family: 'Prompt', sans-serif;
+    color: var(--decor1);
+    background: linear-gradient(to right,
+            var(--decor3),
+            var(--g1),
+            var(--decor2),
+            var(--g2),
+            var(--decor3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+}
+
+.card-interactor .unhover .utxt {
+    font-weight: 600;
+    font-size: 55px;
+    font-family: 'Prompt', sans-serif;
+    color: var(--decor1);
+    background: linear-gradient(to right,
+            var(--decor3),
+            var(--g1),
+            var(--decor2),
+            var(--g2),
+            var(--decor3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+}
+
+/* cool scrolling effects */
+.upperbody .helpertext_end {
+    background: linear-gradient(to right,
+            var(--g0),
+            var(--g1),
+            var(--g2),
+            var(--g0));
+    animation: txt-gradient 20s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+
+    padding-top: 22vh;
+    font-weight: 600;
+    font-size: 90px;
+    font-family: 'Prompt', sans-serif;
+    color: var(--decor1);
+    margin: 0px 0px 0px 0px;
+
+    transition: opacity 1000ms;
+    opacity: 1;
+}
+
+.upperbody .helpertext_play {
+    background: linear-gradient(to right,
+            var(--g0),
+            var(--g1),
+            var(--g2),
+            var(--g0));
+    animation: txt-gradient 20s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+
+    padding-top: 22vh;
+    font-weight: 600;
+    font-size: 90px;
+    font-family: 'Prompt', sans-serif;
+    color: var(--decor1);
+    margin: 0px 0px 0px 0px;
+
+    transition: opacity 1000ms;
+    opacity: 0;
+}
+
+.upperbody {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hiddenbody {
+    opacity: 0;
+    transition: opacity 600ms;
+}
+
+.visiblebody {
+    opacity: 1;
+    transition: opacity 600ms;
+}
