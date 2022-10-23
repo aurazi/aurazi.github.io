@@ -1,11 +1,13 @@
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 const lerp = (start, end, alpha) => start + (end - start) * alpha;
 const pickRandom = (list) => list[Math.floor(Math.random() * list.length)]; /* Math.random() can never be 1 so flooring it ensures we're in range */
+const uid = () => Date.now().toString(36) + Math.random().toString(36).substring(2);
 
 let isBodyHidden = true;
+let skewingId = "";
 
 class CardSkew {
-    constructor(element, angleSkew, skewSpeed, perspective, skewInRange, scaleInRange) {
+    constructor(element, angleSkew, skewSpeed, perspective, skewInRange, scaleInRange, globalOnceOnly) {
         let thisPtr = this;
         this.element = element;
         this.angleSkew = angleSkew;
@@ -29,21 +31,40 @@ class CardSkew {
         this.isInRange = false;
         this.dynScale = 1;
 
+        this.unique = ""
+
         this.update_card_properties();
         addEventListener('resize', this.update_card_properties);
         addEventListener('mousemove', (event) => {
             const rect = this.element.getBoundingClientRect();
 
-            const pfpCenterX = this.WidthH + rect.left;
-            const pfpCenterY = this.Height + rect.top;
+            /* respect 3d transform */
+            const dynWidthH = this.WidthH * this.dynScale;
+            const dynHeightH = this.HeightH * this.dynScale;
 
-            const xDisplacement = event.clientX - pfpCenterX;
-            const yDisplacement = event.clientY + this.HeightH - pfpCenterY;
+            const cardCenterX = dynWidthH + rect.left;
+            const cardCenterY = dynHeightH + rect.top;
 
-            this.isInRange = Math.abs(xDisplacement) <= this.WidthH && Math.abs(yDisplacement) <= this.HeightH;
+            const xDisplacement = event.clientX - cardCenterX;
+            const yDisplacement = event.clientY - cardCenterY;
 
-            const relativeX = clamp(xDisplacement, -this.WidthH, this.WidthH);
-            const relativeY = clamp(yDisplacement, -this.HeightH, this.HeightH);
+            this.isInRange = Math.abs(xDisplacement) <= dynWidthH && Math.abs(yDisplacement) <= dynHeightH;
+            if (globalOnceOnly && !this.isInRange) {
+                skewingId = "";
+            }
+            if (globalOnceOnly && skewingId == "" && this.isInRange) {
+                this.unique = uid();
+                skewingId = this.unique;
+            } else if (globalOnceOnly && !(skewingId == this.unique)) {
+                this.isInRange = false;
+                this.targetRotateX = 0;
+                this.targetRotateY = 0;
+                this.update();
+                return null;
+            }
+
+            const relativeX = clamp(xDisplacement, -dynWidthH, dynWidthH);
+            const relativeY = clamp(yDisplacement, -dynHeightH, dynHeightH);
 
             this.targetRotateX = this.angleSkew * relativeY * this.RcpHeightH;
             this.targetRotateY = -this.angleSkew * relativeX * this.RcpWidthH;
@@ -63,6 +84,7 @@ class CardSkew {
         this.RcpHeightH = 1 / this.HeightH;
     }
     update() {
+        let thisPtr = this;
         if (this.element == null) {
             return null; // DOM reload detected; fallback
         }
@@ -73,9 +95,24 @@ class CardSkew {
             this.currentRotateX = lerp(this.currentRotateX, this.targetRotateX, this.skewSpeed);
             this.currentRotateY = lerp(this.currentRotateY, this.targetRotateY, this.skewSpeed);
             this.element.style.transform = 'perspective(' + this.perspective + 'px) rotateX(' + this.currentRotateX + 'deg) rotateY(' + this.currentRotateY + 'deg) scale3d(' + this.dynScale + ", " + this.dynScale + ", " + this.dynScale + ")";
+
+            if (this.backgroundInterval != null) {
+                if (Math.abs(this.currentRotateX) < 0.5 && Math.abs(this.currentRotateY) <= 0.5 && this.dynScale <= 1.01) {
+                    clearInterval(this.backgroundInterval);
+                    this.backgroundInterval = null;
+                }
+            } else if (!(Math.abs(this.currentRotateX) < 0.5 && Math.abs(this.currentRotateY) <= 0.5 && this.dynScale <= 1.01)) {
+                this.backgroundInterval = setInterval(() => {
+                    thisPtr.update();
+                }, 10);
+            }
+
             return null;
         } else if (this.skewInRange && this.isInRange) {
-
+            if (this.backgroundInterval != null) {
+                clearInterval(this.backgroundInterval);
+                this.backgroundInterval = null;
+            }
             this.update_card_properties();
             this.dynScale = lerp(this.dynScale, this.scaleInRange, this.skewSpeed);
         }
@@ -140,7 +177,7 @@ function init_pfp_card() {
 
     for (let i = 0; i < cards.length; i++) {
         const card = cards[i];
-        const card_skewer = new CardSkew(card, 10, 0.1, 500, true, 1.4);
+        const card_skewer = new CardSkew(card, 10, 0.1, 500, true, 1.4, true);
     }
 }
 
