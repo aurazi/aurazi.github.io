@@ -138,7 +138,7 @@ const words = [
     "anime",
     "manga",
     "webtoons",
-    "my self",
+    "myself",
     "you",
 ];
 const typeDelay = 300;
